@@ -88,7 +88,8 @@ VLANs help mitigate several common network threats:
 
 ## 🧪 7. Hypothetical Network Design Scenario
 
-In a hypothetical organization:
+In a hypothetical o<img width="1327" height="780" alt="router config" src="https://github.com/user-attachments/assets/6ea614f5-18cf-40ae-9fee-eb6a751304a0" />
+rganization:
 
 * 🧑‍💼 VLAN 10 – Management
 * 💻 VLAN 20 – IT Department
@@ -100,6 +101,9 @@ Each VLAN is isolated, with restricted inter-VLAN communication enforced via rou
 ---
 
 ## 📈 8. Benefits and Limitations
+<img width="787" height="763" alt="port security 2" src="https://github.com/user-attachments/assets/6fe55e0c-f980-4377-9514-7b982fb93bf1" />
+
+
 
 ### ✅ Benefits
 
