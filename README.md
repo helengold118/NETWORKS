@@ -16,7 +16,7 @@ This hypothetical document presents an overview of how **Virtual Local Area Netw
 6. ⚠️ Threats Mitigated by VLAN Implementation
 7. 🧪 Hypothetical Network Design Scenario
 8. 📈 Benefits and Limitations
-9. ✅ Conclusion
+9. ✅ Conclusionn
 
 ---
 
