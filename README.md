@@ -115,7 +115,7 @@ Each VLAN is isolated, with restricted inter-VLAN communication enforced via rou
 
 ---
 
-## ✅ 9. Conclusion
+## ✅ 9. ConclusionJJ
 
 VLANs are a powerful and cost-effective tool for enhancing network security. When properly designed and implemented, they provide strong segmentation, improved performance, and a solid foundation for layered network defense strategies.
 
