@@ -331,3 +331,176 @@ Linux command-line usage
 Metasploit framework
 
 Ethical hacking methodology.
+
+
+
+
+ <h1><strong>Standard ACL and Wildcard Mask Configuration — Practical Cisco Networking Lab</strong></h1>
+📌 Project Overview
+
+This repository documents the configuration and implementation of Standard Access Control Lists (ACLs) using wildcard masks on Cisco network devices. The goal of this lab is to demonstrate how network administrators control traffic flow by filtering packets based on source IP addresses while applying security best practices.
+
+Standard ACLs are widely used in enterprise environments to enforce basic traffic filtering, improve network segmentation, and enhance overall security posture.
+
+🎯 Objectives
+
+Understand Standard ACL functionality.
+
+Learn Cisco ACL numbering conventions.
+
+Configure Standard ACLs using wildcard masks.
+
+Apply ACLs to network interfaces.
+
+Verify and troubleshoot ACL behavior.
+
+Demonstrate real-world network access control scenarios.
+
+🧰 Technologies and Tools
+
+Cisco Router / Cisco Packet Tracer / GNS3
+
+Cisco IOS CLI
+
+Networking fundamentals (IP addressing, subnetting)
+
+📚 Concept Overview
+✅ What is a Standard ACL?
+
+A Standard Access Control List filters traffic based only on:
+
+Source IP address
+
+Unlike extended ACLs, standard ACLs cannot filter based on:
+
+Destination IP
+
+Protocol type
+
+Port numbers
+
+🔢 Standard ACL Number Range
+
+Standard ACLs use the following numbering:
+
+1 – 99 (original range)
+
+1300 – 1999 (expanded range)
+
+Example:
+
+access-list 10 permit 192.168.1.0 0.0.0.255
+
+🌐 Wildcard Mask Explained
+
+A wildcard mask determines which bits of an IP address must match.
+
+It is essentially the inverse of a subnet mask.
+
+Key Rules:
+
+0 = Must match exactly.
+
+1 = Ignore (any value allowed).
+
+Example Comparison
+Subnet Mask	Wildcard Mask
+255.255.255.0	0.0.0.255
+255.255.0.0	0.0.255.255
+255.0.0.0	0.255.255.255
+
+🚀 Configuration Steps
+Step 1 — Enter Global Configuration Mode
+enable
+configure terminal
+
+<img width="1756" height="1030" alt="ACL 1" src="https://github.com/user-attachments/assets/044e24c8-f48a-4871-a52e-d26a0eab611a" />
+
+Step 2 — Create Standard ACL
+access-list 10 permit 192.168.1.0 0.0.0.255
+access-list 10 deny any
+
+<img width="1531" height="937" alt="new ACL" src="https://github.com/user-attachments/assets/be64ae72-8f12-40f2-b7e0-807a8ecb67c7" />
+
+
+Explanation:
+
+Permit traffic from 192.168.1.0/24
+
+Deny all other sources (implicit deny also exists).
+
+Step 3 — Apply ACL to Interface
+
+Standard ACL best practice:
+
+👉 Place close to destination.
+
+interface GigabitEthernet0/1
+ip access-group 10 in
+
+🔎 Verification
+
+Check ACL configuration:
+
+show access-lists
+
+<img width="1108" height="947" alt="ACL 2" src="https://github.com/user-attachments/assets/ad2d007a-b262-48fb-8f84-234f6ba02789" />
+
+Check interface application:
+
+show running-config
+
+📊 Expected Results
+
+✅ Devices from 192.168.1.0 network allowed.
+❌ All other traffic blocked.
+
+⚠️ Important Notes
+
+ACLs are processed top-down.
+
+First matching rule applies.
+
+Implicit deny exists at the end of every ACL.
+
+Rule order is critical.
+
+🔐 Security Best Practices
+
+Use descriptive naming (named ACLs when possible).
+
+Document wildcard mask logic.
+
+Apply least privilege principle.
+
+Avoid overly permissive rules.
+
+Regularly audit ACL entries.
+
+🧠 Real-World Applications
+
+Enterprise network segmentation.
+
+Restricting management access.
+
+Protecting sensitive servers.
+
+Basic firewall filtering.
+
+Controlling inter-VLAN communication.
+
+🎓 Skills Demonstrated
+
+Cisco ACL configuration
+
+Wildcard mask calculation
+
+Network traffic filtering
+
+Security policy implementation
+
+Troubleshooting ACL behavior
+
+⚠️ Ethical Notice
+
+This lab is for educational purposes within controlled environments only.
