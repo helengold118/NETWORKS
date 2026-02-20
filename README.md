@@ -660,3 +660,170 @@ Permit only specific inbound services.
 ✔ Document ACL entries clearly.
 ✔ Regularly audit and review rule sets.
 ✔ Use named ACLs in complex environments for better readability.
+
+
+<br> <br>
+<h1><strong>🔐 Named Extended ACL — Configuration, Analysis & Real-World Use Cases</strong></h1>
+📌 Project Overview
+
+This project provides a comprehensive breakdown of Named Extended Access Control Lists (ACLs) in Cisco networking environments.
+
+It covers:
+
+What a Named Extended ACL does
+
+How it works
+
+Configuration example
+
+Merits and demerits
+
+Real-world use case scenarios
+
+Security best practices
+
+Named Extended ACLs provide granular traffic filtering and are widely used in enterprise network security architectures.
+
+<h3><strong>📚 1️⃣ What is a Named Extended ACL?</strong></h3>
+
+A Named Extended ACL is a Cisco access control mechanism that filters network traffic based on:
+
+Source IP address
+
+Destination IP address
+
+Protocol (TCP, UDP, ICMP, IP)
+
+Port numbers
+
+Unlike numbered ACLs, named ACLs use descriptive names instead of numeric identifiers, improving readability and management.
+
+Example:
+
+ip access-list extended WEB_SERVER_POLICY
+⚙️ 2️⃣ What Does a Named Extended ACL Do?
+
+A Named Extended ACL can:
+
+✔ Allow or deny specific protocols
+✔ Filter traffic by source and destination
+✔ Restrict access to specific ports
+✔ Control inter-VLAN communication
+✔ Enforce enterprise security policies
+✔ Reduce attack surface
+
+Like all ACLs:
+
+Processed top-down
+
+First match wins
+
+Implicit deny ip any any at the end
+
+🛠️ 3️⃣ Configuration Example
+🎯 Scenario
+
+Internal Network: 192.168.1.0/24
+
+Web Server: 10.0.0.10
+
+Requirements:
+
+Allow HTTP and HTTPS access to the web server
+
+Block FTP access
+
+Deny all other traffic
+
+✅ Step 1 — Create Named Extended ACL
+ip access-list extended WEB_SERVER_POLICY
+ permit tcp 192.168.1.0 0.0.0.255 host 10.0.0.10 eq 80
+ permit tcp 192.168.1.0 0.0.0.255 host 10.0.0.10 eq 443
+ deny tcp 192.168.1.0 0.0.0.255 host 10.0.0.10 eq 21
+ deny ip any any
+
+
+ <img width="1085" height="902" alt="EXTENDED ACL PROJECT" src="https://github.com/user-attachments/assets/74e6258f-bf28-40f5-8316-1a5f40d1778c" />
+
+✅ Step 2 — Apply to Interface
+interface GigabitEthernet0/1
+ ip access-group WEB_SERVER_POLICY in
+
+ 
+<img width="836" height="797" alt="EXTENDED NAMED ACL PROJ" src="https://github.com/user-attachments/assets/d18036c5-fa64-4730-a0ba-20a3474b8174" />
+
+ 
+
+<h3><strong>📈 4️⃣ Merits of Named Extended ACLs</strong></h3>
+🔹 1. Improved Readability
+
+Descriptive names make policies easier to understand.
+
+🔹 2. Better Manageability
+
+Easier to modify specific entries without deleting the entire ACL.
+
+🔹 3. Granular Traffic Filtering
+
+Supports filtering by IP, protocol, and port.
+
+🔹 4. Enterprise-Level Policy Enforcement
+
+Useful for department-level access control.
+
+🔹 5. Stronger Documentation Practice
+
+Names reflect business intent (e.g., HR_POLICY, SERVER_PROTECTION).
+
+<h3><strong>⚠️ 5️⃣ Demerits of Named Extended ACLs</strong></h3>
+🔸 1. Configuration Complexity
+
+More detailed rules increase risk of misconfiguration.
+
+🔸 2. Order Dependency
+
+Incorrect rule order can unintentionally block legitimate traffic.
+
+🔸 3. Stateless Nature
+
+Does not track connection states like modern firewalls.
+
+🔸 4. Scaling Challenges
+
+Large ACLs may impact readability and troubleshooting.
+
+🌍 6️⃣ Real-World Use Case Scenarios
+🏢 Enterprise Network Segmentation
+
+Restrict guest VLAN from internal servers.
+
+Allow IT department broader network access.
+
+🖥️ Server Protection
+
+Allow HTTPS access to production web servers.
+
+Restrict SSH management access to admin subnet only.
+
+<h3><strong>🔄 Inter-VLAN Traffic Control</strong></h3>
+
+Permit Sales VLAN to access CRM server only.
+
+Block direct access to database servers.
+
+🌐 Perimeter Security
+
+Permit only required inbound services.
+
+Block unauthorized external traffic.
+
+<h3><strong>🛡️ Security Best Practices</strong></h3>
+
+✔ Place Extended ACLs close to the source.
+✔ Follow the principle of least privilege.
+✔ Document ACL naming conventions clearly.
+✔ Regularly audit ACL rules.
+✔ Avoid overly broad “permit any” rules.
+
+<img width="1012" height="336" alt="comparison" src="https://github.com/user-attachments/assets/731ca8a4-5d9f-4ef8-a91b-634e7e51636b" />
+
