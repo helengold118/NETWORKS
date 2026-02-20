@@ -504,3 +504,159 @@ Troubleshooting ACL behavior
 ⚠️ Ethical Notice
 
 This lab is for educational purposes within controlled environments only.
+
+
+
+
+
+<br>
+<br>
+<br>
+<h1><strong>📚 1️⃣ What is a Numbered Extended ACL?</strong></h1>
+
+A Numbered Extended ACL is a Cisco access control mechanism used to filter network traffic based on multiple parameters, including:
+
+Source IP address
+
+Destination IP address
+
+Protocol (TCP, UDP, ICMP, IP)
+
+Port numbers
+
+Traffic direction
+
+Unlike standard ACLs (which filter only by source IP), extended ACLs provide fine-grained control over network communication.
+
+🔢 Number Range for Extended ACLs
+
+Numbered Extended ACLs use:
+
+100 – 199
+
+2000 – 2699 (Expanded range)
+
+Example:
+
+access-list 110 permit tcp 192.168.1.0 0.0.0.255 any eq 80
+⚙️ 2️⃣ What Does a Numbered Extended ACL Do?
+
+A numbered extended ACL can:
+
+✔ Allow specific traffic (e.g., HTTP only)
+✔ Block specific protocols (e.g., Telnet)
+✔ Restrict access to specific servers
+✔ Control inter-VLAN communication
+✔ Prevent unauthorized service access
+✔ Reduce attack surface
+
+It evaluates traffic using a top-down, first-match logic model.
+
+There is always an implicit:
+
+deny ip any any
+
+at the end of every ACL.
+
+🛠️ 3️⃣ Example Configuration Scenario
+🎯 Scenario
+
+Network A: 192.168.1.0/24
+
+Server: 10.0.0.10
+
+Requirement:
+
+Allow HTTP access to the server
+
+Block FTP access
+
+Deny all other traffic
+for example:
+✅ Configuration
+access-list 110 permit tcp 192.168.1.0 0.0.0.255 host 10.0.0.10 eq 80
+access-list 110 deny tcp 192.168.1.0 0.0.0.255 host 10.0.0.10 eq 21
+access-list 110 deny ip any any
+
+<img width="897" height="661" alt="numbered extended ACL" src="https://github.com/user-attachments/assets/b94e559f-6970-4737-a134-14622522aefc" />
+
+Apply to interface:
+
+interface GigabitEthernet0/1
+ip access-group 110 in
+
+
+<h3><strong>📈 4️⃣ Merits of Numbered Extended ACLs </strong></h3>
+🔹 1. Granular Traffic Control
+
+Allows filtering based on IP, protocol, and port numbers.
+
+🔹 2. Improved Security
+
+Reduces attack surface by restricting unnecessary services.
+
+🔹 3. Network Segmentation
+
+Controls communication between VLANs and departments.
+
+🔹 4. Policy Enforcement
+
+Implements organizational access control policies.
+
+🔹 5. Cost-Effective Security Layer
+
+Acts as a basic firewall mechanism within routers.
+
+<h3><strong>⚠️ 5️⃣ Demerits of Numbered Extended ACLs </strong></h3>
+🔸 1. Complexity
+
+Rules can become difficult to manage in large networks.
+
+🔸 2. Order Sensitivity
+
+Improper rule order can cause unintended traffic blocking.
+
+🔸 3. Stateless Filtering
+
+Extended ACLs do not track session states like modern firewalls.
+
+🔸 4. Limited Logging Capabilities
+
+Basic ACLs provide limited traffic visibility.
+
+🔸 5. Scalability Challenges
+
+Large rule sets may affect performance and manageability.
+
+🌍 6️⃣ Real-World Use Case Scenarios
+🏢 Enterprise Network Security
+
+Allow HR department access to payroll server.
+
+Block guest network from internal systems.
+
+🖥️ Server Protection
+
+Allow HTTPS traffic to web server.
+
+Block SSH access from unauthorized networks.
+
+<h3><strong>🔄 Inter-VLAN Traffic Control</strong></h3>
+
+Permit IT VLAN full access.
+
+Restrict Sales VLAN from accessing database VLAN.
+
+<h3><strong>🌐 Perimeter Filtering</strong></h3>
+
+Block known malicious IP ranges.
+
+Permit only specific inbound services.
+
+<h3><strong>🧠 Security Best Practices</strong></h3>
+
+✔ Place extended ACLs close to the source.
+✔ Follow the principle of least privilege.
+✔ Document ACL entries clearly.
+✔ Regularly audit and review rule sets.
+✔ Use named ACLs in complex environments for better readability.
